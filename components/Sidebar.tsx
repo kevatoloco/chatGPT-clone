@@ -6,6 +6,7 @@ import { useSession, signOut } from "next-auth/react";
 import { collection, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import ChatRow from "./ChatRow";
+import ModelSelection from "./ModelSelection";
 
 function Sidebar() {
   const { data: session } = useSession();
@@ -24,7 +25,9 @@ function Sidebar() {
         <div>
           {/* new chat */}
           <NewChat />
-          <div>{/* ModelSelection */}</div>
+          <div className="hidden sm:inline">
+            <ModelSelection />
+          </div>
           {/* Map through the ChatRows */}
           {chats?.docs.map((chat) => (
             <ChatRow key={chat.id} id={chat.id} />
