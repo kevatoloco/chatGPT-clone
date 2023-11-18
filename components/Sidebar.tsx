@@ -25,13 +25,18 @@ function Sidebar() {
         <div>
           {/* new chat */}
           <NewChat />
-          <div className="hidden sm:inline">
-            <ModelSelection />
+
+          <div className="flex flex-col space-y-2 my-2">
+            {loading && (
+              <div className="animate-pulse text-center text-white">
+                <p>Loading Chats...</p>
+              </div>
+            )}
+            {/* Map through the ChatRows */}
+            {chats?.docs.map((chat) => (
+              <ChatRow key={chat.id} id={chat.id} />
+            ))}
           </div>
-          {/* Map through the ChatRows */}
-          {chats?.docs.map((chat) => (
-            <ChatRow key={chat.id} id={chat.id} />
-          ))}
         </div>
       </div>
       {session && (
